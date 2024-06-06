@@ -1,0 +1,23 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node index-local.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hono/node-server": "^1.11.2",
+    "@prisma/adapter-d1": "^5.15.0",
+    "hono": "^4.4.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "prisma": "^5.15.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}

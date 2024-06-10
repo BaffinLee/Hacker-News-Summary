@@ -1,0 +1,9 @@
+name = "hacker-news-backend"
+main = "entry/index.ts"
+compatibility_date = "2024-03-20"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "hacker-news"
+database_id = "4447f6eb-fbe3-4477-8785-be5b1fb21c1f"

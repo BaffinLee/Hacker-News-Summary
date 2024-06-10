@@ -1,21 +1,16 @@
 import { Hono } from 'hono';
 import { serve } from '@hono/node-server'
+import { ROUTES } from './routes';
 
-export type Env = {
-  DATABASE_URL: string;
-};
+const app = new Hono();
 
-const app = new Hono<{ Bindings: Env }>();
-
-app.get('/', (c) => {
-  return c.json({
-    message: 'Hello World!',
-  });
+ROUTES.forEach(route => {
+  app.on(route.method, route.path, route.handler);
 });
 
 serve({
   fetch: app.fetch,
-  port: 8080,
+  port: Number(process.env.PORT || 8080),
 }, (info) => {
   console.log(`Listening on http://localhost:${info.port}`);
 });

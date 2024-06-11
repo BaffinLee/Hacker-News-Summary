@@ -3,6 +3,7 @@ import { getNewsList } from "../controller/home";
 import { scrapNews } from "../controller/scrap-news";
 import { Env } from "../types";
 import { aiSummarize } from "../controller/ai";
+import { summarizeNews } from "../controller/summarize-news";
 
 export const ROUTES = [
     {
@@ -20,6 +21,11 @@ export const ROUTES = [
         path: '/ai-summarize',
         handler: aiSummarize,
     },
+    {
+        method: 'get',
+        path: '/summarize-news',
+        handler: summarizeNews,
+    },
 ];
 
 export async function handleCron(event: ScheduledEvent, env: Env) {
@@ -29,6 +35,8 @@ export async function handleCron(event: ScheduledEvent, env: Env) {
             await scrapNews({ env });
             break;
         case '*/3 * * * *':
+            // @ts-ignore
+            await summarizeNews({ env });
             break;
     }
 }

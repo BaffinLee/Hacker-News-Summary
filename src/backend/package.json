@@ -6,6 +6,7 @@
   "scripts": {
     "start:local": "ts-node entry/index-local.ts",
     "start:worker": "wrangler dev",
+    "deploy": "wrangler deploy",
     "migration:local": "prisma db push",
     "migration:worker:local": "wrangler d1 migrations apply hacker-news --local",
     "migration:worker:remote": "wrangler d1 migrations apply hacker-news --remote",
@@ -22,6 +23,8 @@
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240605.0",
     "@types/node": "^20.14.2",
+    "@types/node-fetch": "^2.6.11",
+    "node-fetch": "^2.7.0",
     "prisma": "^5.15.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",

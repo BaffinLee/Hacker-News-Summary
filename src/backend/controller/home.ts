@@ -1,9 +1,11 @@
 import { Context } from "hono";
-import { D1Database } from '@cloudflare/workers-types';
 import { NewsModel } from "../model/news";
+import { Env } from "../types";
 
-export async function getNewsList(ctx: Context<{ Bindings: { DB?: D1Database } }>) {
+export async function getNewsList(ctx: Context<{ Bindings: Partial<Env> }>) {
+    const pageNow = Number(ctx.req.query('pageNow')) || 1;
+    const pageSize = Number(ctx.req.query('pageSize')) || 10;
     const newsModel = new NewsModel(ctx.env.DB);
-    const news = await newsModel.getNews();
+    const news = await newsModel.getNewsList((pageNow - 1) * pageSize, pageSize);
     return ctx.json(news);
 }

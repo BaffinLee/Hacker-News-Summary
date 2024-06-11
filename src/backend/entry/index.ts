@@ -1,15 +1,17 @@
-import { D1Database } from '@cloudflare/workers-types';
+import { ScheduledEvent, ExecutionContext } from '@cloudflare/workers-types';
 import { Hono } from 'hono';
-import { ROUTES } from './routes';
-
-export type Env = {
-  DB: D1Database,
-};
+import { ROUTES, handleCron } from './routes';
+import { Env } from '../types';
 
 const app = new Hono<{ Bindings: Env }>();
 
 ROUTES.forEach(route => {
     app.on(route.method, route.path, route.handler);
 });
+
+// @ts-ignore
+app.scheduled = (event: ScheduledEvent, env: Env, ctx: ExecutionContext) => {
+  ctx.waitUntil(handleCron(event, env));
+};
 
 export default app;

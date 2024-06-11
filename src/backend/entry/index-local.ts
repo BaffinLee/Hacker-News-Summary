@@ -1,6 +1,12 @@
+import fetch from 'node-fetch';
 import { Hono } from 'hono';
 import { serve } from '@hono/node-server'
 import { ROUTES } from './routes';
+
+if (!globalThis.fetch) {
+  // @ts-ignore
+  globalThis.fetch = fetch;
+}
 
 const app = new Hono();
 

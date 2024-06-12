@@ -1,6 +1,6 @@
 import { ScheduledEvent } from "@cloudflare/workers-types";
 import { getNewsList } from "../controller/home";
-import { scrapNews } from "../controller/scrap-news";
+import { scrapeNews } from "../controller/scrape-news";
 import { Env } from "../types";
 import { aiSummarize } from "../controller/ai";
 import { summarizeNews } from "../controller/summarize-news";
@@ -14,7 +14,7 @@ export const ROUTES = [
     {
         method: 'get',
         path: '/scrap-news',
-        handler: scrapNews,
+        handler: scrapeNews,
     },
     {
         method: 'post',
@@ -32,7 +32,7 @@ export async function handleCron(event: ScheduledEvent, env: Env) {
     switch (event.cron) {
         case '*/10 * * * *':
             // @ts-ignore
-            await scrapNews({ env });
+            await scrapeNews({ env });
             break;
         case '*/3 * * * *':
             // @ts-ignore

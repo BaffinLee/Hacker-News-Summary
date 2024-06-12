@@ -1,11 +1,10 @@
-import { Context } from "hono";
 import { NewsModel } from "../model/news";
-import { Env, NewsInfo } from "../types";
+import { NewsInfo, OptionalContext } from "../types";
 
 const FETCH_LIST_SIZE = 30;
 const FETCH_DETAIL_SIZE = 10;
 
-export async function scrapeNews(ctx?: Context<{ Bindings: Partial<Env> }>) {
+export async function scrapeNews(ctx?: OptionalContext) {
     const newsModel = new NewsModel(ctx?.env.DB);
     const newsIds: number[] = await fetch('https://hacker-news.firebaseio.com/v0/topstories.json?print=pretty').then(res => res.json());
     const newsIdsToSave = await newsModel.filterNewsIds(newsIds.slice(0, FETCH_LIST_SIZE));

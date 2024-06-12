@@ -31,11 +31,9 @@ export const ROUTES = [
 export async function handleCron(event: ScheduledEvent, env: Env) {
     switch (event.cron) {
         case '*/10 * * * *':
-            // @ts-ignore
             await scrapeNews({ env });
             break;
         case '*/3 * * * *':
-            // @ts-ignore
             await summarizeNews({ env });
             break;
     }

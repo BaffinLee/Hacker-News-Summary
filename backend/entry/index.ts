@@ -9,8 +9,7 @@ ROUTES.forEach(route => {
     app.on(route.method, route.path, route.handler);
 });
 
-// @ts-ignore
-app.scheduled = (event: ScheduledEvent, env: Env, ctx: ExecutionContext) => {
+(app as any).scheduled = (event: ScheduledEvent, env: Env, ctx: ExecutionContext) => {
   ctx.waitUntil(handleCron(event, env));
 };
 

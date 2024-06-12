@@ -4,8 +4,7 @@ import { serve } from '@hono/node-server'
 import { ROUTES } from './routes';
 
 if (!globalThis.fetch) {
-  // @ts-ignore
-  globalThis.fetch = fetch;
+  (globalThis as any).fetch = fetch;
 }
 
 const app = new Hono();

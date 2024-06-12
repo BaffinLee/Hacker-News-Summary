@@ -13,7 +13,7 @@ export const ROUTES = [
     },
     {
         method: 'get',
-        path: '/scrap-news',
+        path: '/scrape-news',
         handler: scrapeNews,
     },
     {

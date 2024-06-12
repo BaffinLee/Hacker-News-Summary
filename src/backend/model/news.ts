@@ -48,4 +48,16 @@ export class NewsModel {
             data: { summary },
         });
     }
+
+    getNeedSummarizeList(take = 3) {
+        return this.model.news.findMany({
+            orderBy: [{
+                createdAt: 'desc',
+            }],
+            where: {
+                summary: null,
+            },
+            take,
+        });
+    }
 }

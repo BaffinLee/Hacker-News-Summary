@@ -4,7 +4,7 @@ import { load } from 'cheerio';
 import { getAiSummarize } from "./ai";
 
 const BATCH_SIZE = 3;
-const MAX_CONTENT_LENGTH = 5000;
+const MAX_CONTENT_LENGTH = 10000;
 
 export async function summarizeNews(ctx?: OptionalContext) {
     const newsModel = new NewsModel(ctx?.env.DB);

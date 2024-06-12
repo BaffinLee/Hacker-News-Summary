@@ -22,7 +22,7 @@ export function getAiSummarize(content: string, AI?: Ai): Promise<{ summary: str
     if (AI) {
         return AI.run(AI_MODEL, {
             input_text: content,
-            max_length: 500
+            max_length: 1000
         });
     }
     return fetch('https://hacker-news-backend.baffinlee.workers.dev/ai-summarize', {

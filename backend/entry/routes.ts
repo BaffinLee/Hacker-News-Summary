@@ -28,7 +28,8 @@ export const ROUTES = [
     },
 ];
 
-export async function handleCron(event: ScheduledEvent, env: Env) {
+export async function handleCron(event: ScheduledEvent | { cron: string }, env: Partial<Env>) {
+    console.log(`execute cron: ${event.cron}`);
     switch (event.cron) {
         case '*/10 * * * *':
             await scrapeNews({ env });

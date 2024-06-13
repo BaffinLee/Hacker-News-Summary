@@ -2,12 +2,19 @@ import fetch from 'node-fetch';
 import { Hono } from 'hono';
 import { serve } from '@hono/node-server'
 import { ROUTES, handleCron } from './routes';
+import { cors } from 'hono/cors'
 
 if (!globalThis.fetch) {
   (globalThis as any).fetch = fetch;
 }
 
 const app = new Hono();
+
+app.use(cors({
+  maxAge: 60 * 60 * 24,
+  origin: (_, ctx) => (new URL(ctx.req.url)).origin,
+  credentials: true,
+}));
 
 ROUTES.forEach(route => {
   app.on(route.method, route.path, route.handler);

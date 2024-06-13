@@ -26,6 +26,10 @@ export class NewsModel {
         });
     }
 
+    getNewsCount() {
+        return this.model.news.count();
+    }
+
     async filterNewsIds(ids: number[]) {
         const newsList = await this.model.news.findMany({
             where: { id: { in: ids }},

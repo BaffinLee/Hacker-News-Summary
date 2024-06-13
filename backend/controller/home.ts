@@ -7,5 +7,9 @@ export async function getNewsList(ctx: Context<{ Bindings: Partial<Env> }>) {
     const pageSize = Number(ctx.req.query('pageSize')) || 10;
     const newsModel = new NewsModel(ctx.env.DB);
     const news = await newsModel.getNewsList((pageNow - 1) * pageSize, pageSize);
-    return ctx.json(news);
+    const count = await newsModel.getNewsCount();
+    return ctx.json({
+        list: news,
+        count,
+    });
 }

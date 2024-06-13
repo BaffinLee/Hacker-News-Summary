@@ -5,6 +5,9 @@ import { Env } from "../types";
 import { aiSummarize } from "../controller/ai";
 import { summarizeNews } from "../controller/summarize-news";
 
+export const SCRAPE_NEWS_CRON = '*/10 * * * *';
+export const SUMMARIZE_NEWS_CRON = '*/3 * * * *';
+
 export const ROUTES = [
     {
         method: 'get',
@@ -29,12 +32,13 @@ export const ROUTES = [
 ];
 
 export async function handleCron(event: ScheduledEvent | { cron: string }, env: Partial<Env>) {
-    console.log(`execute cron: ${event.cron}`);
     switch (event.cron) {
-        case '*/10 * * * *':
+        case SCRAPE_NEWS_CRON:
+            console.log('execute cron: scrape news');
             await scrapeNews({ env });
             break;
-        case '*/3 * * * *':
+        case SUMMARIZE_NEWS_CRON:
+            console.log('execute cron: summarize news');
             await summarizeNews({ env });
             break;
     }

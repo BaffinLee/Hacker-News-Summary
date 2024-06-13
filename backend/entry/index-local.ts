@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 import { Hono } from 'hono';
 import { serve } from '@hono/node-server'
-import { ROUTES, handleCron } from './routes';
+import { ROUTES, SCRAPE_NEWS_CRON, SUMMARIZE_NEWS_CRON, handleCron } from './routes';
 import { cors } from 'hono/cors'
 
 if (!globalThis.fetch) {
@@ -23,9 +23,9 @@ const ONE_MINUTE = 1000 * 60;
 setInterval(() => {
   const minute = Math.floor(Date.now() / ONE_MINUTE);
   if (minute % 2 === 0) {
-    handleCron({ cron: '*/3 * * * *' }, {});
+    handleCron({ cron: SUMMARIZE_NEWS_CRON }, {});
   } else if (minute % 5 === 0) {
-    handleCron({ cron: '*/10 * * * *' }, {});
+    handleCron({ cron: SCRAPE_NEWS_CRON }, {});
   }
 }, ONE_MINUTE);
 
@@ -34,4 +34,6 @@ serve({
   port: Number(process.env.PORT || 8080),
 }, (info) => {
   console.log(`Listening on http://localhost:${info.port}`);
+  handleCron({ cron: SCRAPE_NEWS_CRON }, {})
+    .then(() => handleCron({ cron: SUMMARIZE_NEWS_CRON }, {}));
 });

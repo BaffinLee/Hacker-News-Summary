@@ -29,6 +29,11 @@ export const ROUTES = [
         path: '/summarize-news',
         handler: summarizeNews,
     },
+    {
+        method: 'get',
+        path: '/',
+        handler: getNewsList,
+    },
 ];
 
 export async function handleCron(event: ScheduledEvent | { cron: string }, env: Partial<Env>) {

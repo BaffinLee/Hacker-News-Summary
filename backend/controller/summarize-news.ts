@@ -12,6 +12,10 @@ export async function summarizeNews(ctx?: OptionalContext) {
     for (let news of newsList) {
         try {
             await newsModel.saveNewsSummary(news.id, '');
+            const urlObject = new URL(news.url);
+            if (['.pdf', '.zip'].find(suffix => urlObject.pathname.endsWith(suffix))) {
+                throw new Error('can not summarize attatchment');
+            }
             const res = await fetch(news.url, {
                 "headers": {
                     "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",

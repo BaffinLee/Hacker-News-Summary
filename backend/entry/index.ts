@@ -8,8 +8,7 @@ const app = new Hono<{ Bindings: Env }>();
 
 app.use(cors({
   maxAge: 60 * 60 * 24,
-  origin: (_, ctx) => (new URL(ctx.req.url)).origin,
-  credentials: true,
+  origin: '*',
 }));
 
 ROUTES.forEach(route => {

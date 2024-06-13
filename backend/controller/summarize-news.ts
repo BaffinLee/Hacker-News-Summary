@@ -47,20 +47,22 @@ export async function summarizeNews(ctx?: OptionalContext) {
                 $(tag).remove();
             });
             const title = $('title').text();
-            if (title.includes('Just a moment')) {
+            const body = $('body').text();
+            if (title.includes('Just a moment') || body.startsWith('Just a moment')) {
                 throw new Error('cloudflare waiting page');
             }
-            const body = $('body').text();
             const content = `${title}\n${body}`.replace(/\s*\n\s*/g, '\n').slice(0, MAX_CONTENT_LENGTH);
             const data = await getAiSummarize(content, ctx?.env.AI);
-            if (data.summary.includes(title) && data.summary.length - title.length < 10) {
+            if ((data.summary.includes(title) || title.includes(data.summary))
+                && data.summary.length - title.length < 10
+            ) {
                 throw new Error('summary similar to title');
             }
             await newsModel.saveNewsSummary(news.id, data.summary);
             news.summary = data.summary;
-            console.log(`summarized news: ${news.title}`);
+            console.log(`summarized news successfully: ${news.title}`);
         } catch (err) {
-            console.error(err);
+            console.error(`summarized news failed: ${news.title}\n`, err);
         }
     }
     return ctx?.json?.(newsList);

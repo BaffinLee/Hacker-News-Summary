@@ -21,13 +21,26 @@ export class NewsModel {
             orderBy: [{
                 createdAt: 'desc',
             }],
+            where: {
+                AND: [
+                    { summary: { not: null } },
+                    { summary: { not: '' } },
+                ],
+            },
             skip,
             take,
         });
     }
 
     getNewsCount() {
-        return this.model.news.count();
+        return this.model.news.count({
+            where: {
+                AND: [
+                    { summary: { not: null } },
+                    { summary: { not: '' } },
+                ],
+            },
+        });
     }
 
     async filterNewsIds(ids: number[]) {

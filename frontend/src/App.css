@@ -1,42 +1,86 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.app {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: rgb(240, 242, 245);
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.app > *,
+.app header .container {
+    width: 80%;
+    max-width: 1000px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.app ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.app a {
+    text-decoration: none;
+    color: #333;
 }
 
-.card {
-  padding: 2em;
+.app header {
+    width: 100%;
+    max-width: unset;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 100px;
+    background-color: rgb(255, 102, 0);
+    color: #fff;
 }
 
-.read-the-docs {
-  color: #888;
+header .btns {
+    text-align: right;
+}
+
+.ant-pagination {
+    text-align: center;
+}
+
+main {
+    position: relative;
+    margin-top: -60px;
+    min-height: calc(100vh - 350px);
+}
+
+main .ant-spin {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+ul.news-list {
+    margin-bottom: 20px;
+}
+
+.news-list li {
+    margin-bottom: 10px;
+}
+
+.news-list h2 {
+    margin: 0;
+    font-weight: normal;
+    font-size: 20px;
+    color: #0958d9;
+}
+
+.news-list .info span {
+    color: #999;
+}
+
+.news-list p {
+    font-size: 16px;
+    margin: 0;
+}
+
+footer {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
 }

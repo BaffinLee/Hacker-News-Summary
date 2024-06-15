@@ -2,7 +2,14 @@ import fetch from 'node-fetch';
 import { Hono } from 'hono';
 import { serve } from '@hono/node-server'
 import { ROUTES, SCRAPE_NEWS_CRON, SUMMARIZE_NEWS_CRON, handleCron } from './routes';
-import { cors } from 'hono/cors'
+import { cors } from 'hono/cors';
+import fs from 'fs';
+import path from 'path';
+
+if (!fs.existsSync(path.resolve(__dirname, '../prisma/dev.db'))) {
+  console.error('Please run migration command first! Check README.md for instructions.');
+  process.exit(1);
+}
 
 if (!globalThis.fetch) {
   (globalThis as any).fetch = fetch;

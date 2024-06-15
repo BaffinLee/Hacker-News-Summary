@@ -35,7 +35,7 @@ function App() {
         setLoading(false);
       }).catch(err => {
         if (API_HOST === API_HOST_LOCAL) {
-          message.warning('Fetch from local backend host failed, switch to production host.');
+          message.warning('Fetch from local backend host failed, switch to production host.', 5);
           console.error(err);
           API_HOST = API_HOST_REMOTE;
           fetchNewsList(page);

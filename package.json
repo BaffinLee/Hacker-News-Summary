@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:BaffinLee/Hacker-News-Summary.git",
+  "scripts": {
+    "install": "cd frontend && npm install && cd ../backend && npm install",
+    "start:frontend": "cd frontend && npm run dev",
+    "start:backend": "cd backend && npm run start:local",
+    "migration:backend": "cd backend && npm run migration:local"
+  },
   "author": "Baffin Lee <baffinlee@gmail.com>",
   "license": "MIT"
 }

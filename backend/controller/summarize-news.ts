@@ -38,7 +38,7 @@ export async function summarizeNews(ctx?: OptionalContext) {
                 "method": "GET"
             });
             if (!res || res.status >= 300 || res.status < 200) {
-                throw new Error('status not 200');
+                throw new Error('scraping page got status other than 200');
             }
             const html = await res.text();
             const $ = load(html);
@@ -53,7 +53,7 @@ export async function summarizeNews(ctx?: OptionalContext) {
             const title = $('title').text();
             const body = $('body').text();
             if (title.includes('Just a moment') || body.startsWith('Just a moment')) {
-                throw new Error('cloudflare waiting page');
+                throw new Error('got cloudflare waiting page');
             }
             const content = `${title}\n${body}`.replace(/\s*\n\s*/g, '\n').slice(0, MAX_CONTENT_LENGTH);
             const data = await getAiSummarize(content, ctx?.env.AI);
@@ -65,8 +65,9 @@ export async function summarizeNews(ctx?: OptionalContext) {
             await newsModel.saveNewsSummary(news.id, data.summary);
             news.summary = data.summary;
             console.log(`summarized news successfully: ${news.title}`);
-        } catch (err) {
-            console.error(`summarized news failed: ${news.title}\n`, err);
+        } catch (err: any) {
+            console.error(`summarized news skiped: ${news.title}`);
+            console.error(`reason: ${err?.message}`);
         }
     }
     return ctx?.json?.(newsList);

@@ -11,7 +11,7 @@ interface NewsInfo {
   summary: string | null;
 }
 
-const API_HOST_LOCAL = 'http://localhost:8080';
+const API_HOST_LOCAL = 'http://127.0.0.1:8080';
 const API_HOST_REMOTE = 'https://hacker-news-backend.baffinlee.workers.dev';
 // @ts-ignore
 let API_HOST = process.env.NODE_ENV === 'development'

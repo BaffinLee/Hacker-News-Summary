@@ -39,9 +39,10 @@ setInterval(() => {
 
 serve({
   fetch: app.fetch,
+  hostname: '127.0.0.1',
   port: Number(process.env.PORT || 8080),
 }, (info) => {
-  console.log(`Listening on http://localhost:${info.port}`);
+  console.log(`Listening on http://127.0.0.1:${info.port}`);
   handleCron({ cron: SCRAPE_NEWS_CRON }, {})
     .then(() => handleCron({ cron: SUMMARIZE_NEWS_CRON }, {}));
 });

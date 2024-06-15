@@ -7,6 +7,7 @@
     "install": "cd frontend && npm install && cd ../backend && npm install",
     "start:frontend": "cd frontend && npm run dev",
     "start:backend": "cd backend && npm run start:local",
+    "deploy:backend": "cd backend && npm run deploy",
     "migration:backend": "cd backend && npm run migration:local",
     "test:frontend": "cd frontend && npm run test",
     "test:backend": "cd backend && npm run test"

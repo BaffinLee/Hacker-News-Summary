@@ -7,7 +7,9 @@
     "install": "cd frontend && npm install && cd ../backend && npm install",
     "start:frontend": "cd frontend && npm run dev",
     "start:backend": "cd backend && npm run start:local",
-    "migration:backend": "cd backend && npm run migration:local"
+    "migration:backend": "cd backend && npm run migration:local",
+    "test:frontend": "cd frontend && npm run test",
+    "test:backend": "cd backend && npm run test"
   },
   "author": "Baffin Lee <baffinlee@gmail.com>",
   "license": "MIT"

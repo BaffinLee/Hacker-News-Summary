@@ -1,5 +1,5 @@
 import { Ai, D1Database } from "@cloudflare/workers-types";
-import { Context } from "hono";
+import { Context, HonoRequest } from "hono";
 
 export interface NewsInfo {
     id: number;
@@ -17,4 +17,13 @@ export type Env = {
 export interface OptionalContext {
     env: Partial<Env>;
     json?: Context['json'];
+}
+
+export interface MinimumContext {
+    env: Partial<Env>;
+    json: Context['json'];
+    req: {
+        parseBody: HonoRequest['parseBody'];
+        query: HonoRequest['query'];
+    };
 }

@@ -5,6 +5,7 @@ import { ROUTES, SCRAPE_NEWS_CRON, SUMMARIZE_NEWS_CRON, handleCron } from './rou
 import { cors } from 'hono/cors';
 import fs from 'fs';
 import path from 'path';
+import { Env } from '../types';
 
 if (!fs.existsSync(path.resolve(__dirname, '../prisma/dev.db'))) {
   console.error('Please run migration command first! Check README.md for instructions.');
@@ -15,7 +16,7 @@ if (!globalThis.fetch) {
   (globalThis as any).fetch = fetch;
 }
 
-const app = new Hono();
+const app = new Hono<{ Bindings: Env }>();
 
 app.use(cors({
   maxAge: 60 * 60 * 24,

@@ -62,6 +62,9 @@ export async function summarizeNews(ctx?: OptionalContext) {
             ) {
                 throw new Error('summary similar to title');
             }
+            if (data.summary.length < 10) {
+                throw new Error('summary is too short');
+            }
             await newsModel.saveNewsSummary(news.id, data.summary);
             news.summary = data.summary;
             console.log(`summarized news successfully: ${news.title}`);

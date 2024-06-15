@@ -1,8 +1,7 @@
-import { Context } from "hono";
 import { NewsModel } from "../model/news";
-import { Env } from "../types";
+import { MinimumContext } from "../types";
 
-export async function getNewsList(ctx: Context<{ Bindings: Partial<Env> }>) {
+export async function getNewsList(ctx: MinimumContext) {
     const pageNow = Number(ctx.req.query('pageNow')) || 1;
     const pageSize = Number(ctx.req.query('pageSize')) || 10;
     const newsModel = new NewsModel(ctx.env.DB);

@@ -17,7 +17,7 @@ export async function aiSummarize(ctx?: MinimumContext) {
     return ctx.json(response);
 }
 
-export function getAiSummarize(content: string, AI?: Ai): Promise<{ summary: string, response?: string }> {
+export function getAiSummarize(content: string, AI?: Ai): Promise<{ summary?: string, response?: string }> {
     if (AI) {
         return AI.run(AI_MODEL, {
             prompt: `Please summarize following content and output pure summary without extra description:\n${content}`

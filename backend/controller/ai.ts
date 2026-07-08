@@ -21,7 +21,7 @@ export function getAiSummarize(content: string, AI?: Ai): Promise<{ summary: str
     if (AI) {
         return AI.run(AI_MODEL, {
             prompt: `Please summarize following content and output pure summary without extra description:\n${content}`
-        });
+        }).then(res => res.json()).then(res => ({ ...res, summary: res.response || '' }));
     }
     return fetch('https://hacker-news-backend.baffinlee.workers.dev/ai-summarize', {
         method: 'POST',

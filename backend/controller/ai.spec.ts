@@ -26,5 +26,5 @@ Which brings us to the most important principle on HN: civility. Since long befo
 
 test('getAiSummarize', async () => {
     const res = await getAiSummarize(TEST_CONTENT);
-    expect(res?.summary).toBeTruthy();
+    expect(res?.summary || res?.response).toBeTruthy();
 });

@@ -14,10 +14,7 @@ export async function aiSummarize(ctx?: MinimumContext) {
         throw new HTTPException(400, { message: 'need content string' });
     }
     const response = await getAiSummarize(content, ctx.env.AI);
-    return ctx.json({
-        ...response,
-        summary: response.response || '',
-    });
+    return ctx.json(response);
 }
 
 export function getAiSummarize(content: string, AI?: Ai): Promise<{ summary: string, response?: string }> {

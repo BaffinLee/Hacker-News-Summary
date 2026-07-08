@@ -20,8 +20,7 @@ export async function aiSummarize(ctx?: MinimumContext) {
 export function getAiSummarize(content: string, AI?: Ai): Promise<{ summary: string }> {
     if (AI) {
         return AI.run(AI_MODEL, {
-            input_text: content,
-            max_length: 1000
+            prompt: `Please summarize following content and output pure summary without extra description:\n${content}`
         });
     }
     return fetch('https://hacker-news-backend.baffinlee.workers.dev/ai-summarize', {

@@ -14,14 +14,17 @@ export async function aiSummarize(ctx?: MinimumContext) {
         throw new HTTPException(400, { message: 'need content string' });
     }
     const response = await getAiSummarize(content, ctx.env.AI);
-    return ctx.json(response);
+    return ctx.json({
+        ...response,
+        summary: response.response || '',
+    });
 }
 
-export function getAiSummarize(content: string, AI?: Ai): Promise<{ summary: string }> {
+export function getAiSummarize(content: string, AI?: Ai): Promise<{ summary: string, response?: string }> {
     if (AI) {
         return AI.run(AI_MODEL, {
             prompt: `Please summarize following content and output pure summary without extra description:\n${content}`
-        }).then(res => res.json()).then(res => ({ ...res, summary: res.response || '' }));
+        });
     }
     return fetch('https://hacker-news-backend.baffinlee.workers.dev/ai-summarize', {
         method: 'POST',

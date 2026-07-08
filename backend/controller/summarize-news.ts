@@ -57,6 +57,9 @@ export async function summarizeNews(ctx?: OptionalContext) {
             }
             const content = `${title}\n${body}`.replace(/\s*\n\s*/g, '\n').slice(0, MAX_CONTENT_LENGTH);
             const data = await getAiSummarize(content, ctx?.env.AI);
+            if (!data.summary) {
+                data.summary = data.response || '';
+            }
             if ((data.summary.includes(title) || title.includes(data.summary))
                 && data.summary.length - title.length < 10
             ) {

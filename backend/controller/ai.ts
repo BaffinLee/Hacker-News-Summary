@@ -2,7 +2,7 @@ import { MinimumContext } from "../types";
 import { HTTPException } from 'hono/http-exception';
 import { Ai } from "@cloudflare/workers-types";
 
-const AI_MODEL = '@cf/facebook/bart-large-cnn';
+const AI_MODEL = '@cf/meta/llama-3.2-1b-instruct';
 
 export async function aiSummarize(ctx?: MinimumContext) {
     if (!ctx?.env.AI) {

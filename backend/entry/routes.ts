@@ -5,8 +5,8 @@ import { Env } from "../types";
 import { aiSummarize } from "../controller/ai";
 import { summarizeNews } from "../controller/summarize-news";
 
-export const SCRAPE_NEWS_CRON = '*/10 * * * *';
-export const SUMMARIZE_NEWS_CRON = '*/3 * * * *';
+export const SCRAPE_NEWS_CRON = '0 1 * * *';
+export const SUMMARIZE_NEWS_CRON = '0 */6 * * *';
 
 export const ROUTES = [
     {

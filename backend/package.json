@@ -28,6 +28,6 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
     "vitest": "^1.6.0",
-    "wrangler": "^3.59.0"
+    "wrangler": "^4.108.0"
   }
 }

@@ -73,6 +73,9 @@ export class NewsModel {
             }],
             where: {
                 summary: null,
+                createdAt: {
+                    gt: new Date(Date.now() - 24 * 3600 * 1000),
+                },
             },
             take,
         });

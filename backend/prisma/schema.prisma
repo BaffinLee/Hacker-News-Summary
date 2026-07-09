@@ -12,10 +12,12 @@ datasource db {
 }
 
 model News {
-  id    Int     @id
-  title String
-  user  String
-  url  String
-  summary  String?
+  id        Int      @id
+  title     String
+  user      String
+  url       String
+  summary   String?
   createdAt DateTime @default(now())
+
+  @@index([createdAt])
 }
